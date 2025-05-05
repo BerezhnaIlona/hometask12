@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ukr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/task_style.css" />
+  </head>
+  <body>
+    <h1>Задача 2.</h1>
+    <p>. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування змішуванням.</p>
+    <a href="../index.html" class="back-link">Повернутися на головну сторінку</a>
+    <script>
+      if (confirm('Почати тестування?')) {
+        //1. Приклад масива
+        function newArr(indexNumb, minValue, maxValue) {
+          const table = [];
+          for (let i = 0; i < indexNumb; i++) {
+            table[i] = minValue + Math.floor(Math.random() * (maxValue - minValue + 1));
+          }
+          return table;
+        }
+        const arr = newArr(30, 0, 50);
+
+        let lastInd = arr.length,
+          firstInd = 0,
+          comparNumb = 0,
+          swapNumb = 0;
+        while (firstInd < lastInd) {
+          for (let i = firstInd; i < lastInd - 1; i++) {
+            comparNumb++;
+            if (arr[i] > arr[i + 1]) {
+              let tmp = arr[i];
+              arr[i] = arr[i + 1];
+              arr[i + 1] = tmp;
+              swapNumb++;
+            }
+          }
+          lastInd--;
+          for (let i = lastInd; i > firstInd; i--) {
+            comparNumb++;
+            if (arr[i] < arr[i - 1]) {
+              let tmp = arr[i];
+              arr[i] = arr[i - 1];
+              arr[i - 1] = tmp;
+              swapNumb++;
+            }
+          }
+          firstInd++;
+        }
+
+        document.write(`Масив після сортування бульбашкою має вигляд:<br><br>`);
+        document.write(`${arr}<br><br>`);
+        document.write(`Порівнянь чисел під час сортування масиву бульбашкою було ${comparNumb} раз<br>`);
+        document.write(`Обмінів чисел під час сортування масиву бульбашкою було ${swapNumb} раз<br>`);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ukr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/task_style.css" />
+  </head>
+  <body>
+    <h1>Задача 4.</h1>
+    <p>Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком</p>
+    <a href="../index.html" class="back-link">Повернутися на головну сторінку</a>
+    <script>
+      if (confirm('Почати тестування?')) {
+        //1. Приклад масива
+
+        function createTable(baseArr, highlightElem) {
+          document.write(`<table><tr>`);
+          baseArr.forEach((value, i) => {
+            if (i === highlightElem) {
+              document.write(`<td class='new-class'>${value}</td>`);
+            } else {
+              document.write(`<td>${value}</td>`);
+            }
+          });
+          document.write(`</tr></table>`);
+        }
+        document.write(`<ul class="table-class"><li>`);
+        //Сортування бульбашка
+        const arr = [3, 5, 1, 4, 2];
+        let lastNumb = arr.length;
+        let changed;
+        document.write(`Початковий масив:<br>`);
+        createTable(arr);
+        document.write(`Сортування бульбашкою:<br>`);
+        do {
+          changed = false;
+          for (let i = 1; i < lastNumb; i++) {
+            if (arr[i] < arr[i - 1]) {
+              createTable(arr, i - 1);
+              let tmp = arr[i];
+              arr[i] = arr[i - 1];
+              arr[i - 1] = tmp;
+              changed = true;
+            }
+          }
+        } while (changed);
+        document.write(`Кінцевий масив:<br>`);
+        createTable(arr);
+        document.write(`</li>`);
+        //Сортування змішуванням
+        document.write(`<li>`);
+        const arr1 = [3, 5, 1, 4, 2];
+        document.write(`Початковий масив:<br>`);
+        createTable(arr1);
+        document.write(`Сортування змішуванням:<br>`);
+        let lastInd = arr1.length,
+          firstInd = 0,
+          comparNumb = 0,
+          swapNumb = 0;
+        while (firstInd < lastInd) {
+          for (let i = firstInd; i < lastInd - 1; i++) {
+            if (arr1[i] > arr1[i + 1]) {
+              createTable(arr1, i);
+              console.log(arr1[i]);
+              let tmp = arr1[i];
+              arr1[i] = arr1[i + 1];
+              arr1[i + 1] = tmp;
+            }
+          }
+          lastInd--;
+          for (let i = lastInd; i > firstInd; i--) {
+            if (arr1[i] < arr1[i - 1]) {
+              createTable(arr1, i - 1);
+              let tmp = arr1[i];
+              arr1[i] = arr1[i - 1];
+              arr1[i - 1] = tmp;
+            }
+          }
+          firstInd++;
+        }
+        document.write(`Кінцевий масив:<br>`);
+        createTable(arr1);
+        document.write(`</li>`);
+        document.write(`<li>`);
+        //Сортування включеннями
+        const arr2 = [3, 5, 1, 4, 2];
+        document.write(`Початковий масив:<br>`);
+        createTable(arr2);
+        document.write(`Сортування включеннями:<br>`);
+        let currentElem, i;
+
+        for (let j = 1; j < arr2.length; j++) {
+          currentElem = arr2[j];
+          i = j - 1;
+          createTable(arr2, j);
+          while (i >= 0 && arr2[i] > currentElem) {
+            arr2[i + 1] = arr2[i];
+            i = i - 1;
+          }
+          arr2[i + 1] = currentElem;
+        }
+        document.write(`Кінцевий масив:<br>`);
+        createTable(arr2);
+        document.write(`<li></ul>`);
+      }
+    </script>
+  </body>
+</html>

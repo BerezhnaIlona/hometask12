@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ukr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/task_style.css" />
+  </head>
+  <body>
+    <h1>Задача 3.</h1>
+    <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування включеннями.</p>
+    <a href="../index.html" class="back-link">Повернутися на головну сторінку</a>
+    <script>
+      if (confirm('Почати тестування?')) {
+        //1. Приклад масива
+        function newArr(indexNumb, minValue, maxValue) {
+          const table = [];
+          for (let i = 0; i < indexNumb; i++) {
+            table[i] = minValue + Math.floor(Math.random() * (maxValue - minValue + 1));
+          }
+          return table;
+        }
+        const arr = newArr(30, 0, 50);
+
+        let currentElem,
+          i,
+          comparNumb = 0,
+          swapNumb = 0;
+
+        for (let j = 1; j < arr.length; j++) {
+          currentElem = arr[j];
+          i = j - 1;
+
+          while (i >= 0) {
+            comparNumb++;
+            if (arr[i] > currentElem) {
+              arr[i + 1] = arr[i];
+              swapNumb++;
+              i = i - 1;
+            } else {
+              break;
+            }
+          }
+          arr[i + 1] = currentElem;
+        }
+        document.write(`Масив після сортування бульбашкою має вигляд:<br><br>`);
+        document.write(`${arr}<br><br>`);
+        document.write(`Порівнянь чисел під час сортування масиву бульбашкою було ${comparNumb} раз<br>`);
+        document.write(`Обмінів чисел під час сортування масиву бульбашкою було ${swapNumb} раз<br>`);
+      }
+    </script>
+  </body>
+</html>

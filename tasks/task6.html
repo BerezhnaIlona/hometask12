@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ukr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/task_style.css" />
+  </head>
+  <body>
+    <h1>Задача 6.</h1>
+    <p>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.</p>
+    <a href="../index.html" class="back-link">Повернутися на головну сторінку</a>
+    <script>
+      if (confirm('Почати тестування?')) {
+        //1. Приклад масива
+        const arrName = ['Oksana', 'Mukola', 'Olga', 'Iruna', 'Dmutro', 'Viktor', 'Oleksandr', 'Lida'];
+        document.write(`Початковий масив:<br> ${arrName}<br><br>`);
+        arrName.sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+        document.write(`Упорядкований масив:<br> ${arrName}<br><br>`);
+
+        function searchName(arr, goal) {
+          let leftNumb = 0;
+          let rightNumb = arr.length - 1;
+
+          while (leftNumb <= rightNumb) {
+            let mid = Math.floor((leftNumb + rightNumb) / 2);
+            if (arr[mid].length >= goal) {
+              document.write(`В масиві знайдено імʼя довжиною 5 символів<br>
+              Це імʼя: ${arr[mid]}<br>
+              Воно знаходиться під індексом ${mid}`);
+              return true;
+            } else if (arr[mid].length < goal) {
+              leftNumb = mid + 1;
+            } else {
+              rightNumb = mid - 1;
+            }
+          }
+          document.write(`В масиві не знайдено імʼя довжиною ${goal} символів<br>`);
+          return false;
+        }
+        let goal = 5;
+        searchName(arrName, goal);
+      }
+    </script>
+  </body>
+</html>
